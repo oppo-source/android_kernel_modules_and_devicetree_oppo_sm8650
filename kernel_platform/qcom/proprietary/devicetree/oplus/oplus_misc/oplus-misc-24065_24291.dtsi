@@ -1,0 +1,30 @@
+&pmiv0104_eusb2_repeater {
+	qcom,param-override-seq = <0x0f 0x51 0x07 0x53 0x04 0x54 0x03 0x55 0x07 0x57>;
+	qcom,param-override-seq-host = <0x08 0x51 0x07 0x53 0x01 0x54 0x00 0x55 0x02 0x57>;
+};
+
+&soc {
+	usb_nop_phy: usb_nop_phy {
+		compatible = "usb-nop-xceiv";
+	};
+};
+
+&usb0 {
+	dwc3@a600000 {
+		usb-phy = <&eusb2_phy0>, <&usb_nop_phy>;
+		maximum-speed = "high-speed";
+		dr_mode = "otg";
+		snps,usb2-lpm-disable;
+		snps,usb2-gadget-lpm-disable;
+	};
+};
+
+&usb_qmp_dp_phy {
+	pinctrl-names = "default";
+	pinctrl-0 = <&usb3phy_portselect_default>;
+	status = "disabled";
+};
+
+&pmiv0104_vib {
+    status = "okay";
+};

@@ -1,0 +1,123 @@
+/dts-v1/;
+/plugin/;
+#include <dt-bindings/oplus/hw-id.h>
+#include <dt-bindings/input/linux-event-codes.h>
+#include "../qcom/volcano-mtp-overlay.dts"
+#include "volcano_overlay_common.dtsi"
+#include "knightl_overlay_common.dtsi"
+#include "tp/kninght-oplus-tp-24065.dtsi"
+#include "sensor/knightl-sensor-24065.dtsi"
+#include "oplus_fp/oplus_fp_24065.dtsi"
+#include "oplus_misc/oplus-misc-24065_24291.dtsi"
+#include "oplus_chg/oplus-chg-24291.dtsi"
+#include "oplus_chg/pps/oplus-chg-KnightL-pps-33w.dtsi"
+
+/ {
+    model = "Qualcomm Technologies, Inc. volcano MTP,dongfeng";
+
+    oplus,project-id = <24291>;
+    //oplus,region-id = <REGION_IN>;
+};
+
+&soc {
+  //#ifdef OPLUS_FEATURE_ESIM
+  oplus-gpio {
+    compatible = "oplus,oplus-gpio";
+    pinctrl-names = "oplus_esim", "sim2_det_no_pull", "sim2_det_pull_high", "sim2_det_pull_low";
+    pinctrl-0 = <&esim_det_gpio &esim_en_gpio>;
+    pinctrl-1 = <&sim2_det_no_pull>;
+    pinctrl-2 = <&sim2_det_pull_high>;
+    pinctrl-3 = <&sim2_det_pull_low>;
+    oplus,oplus-esim-det = <&pmxr2230_gpios 11 GPIO_ACTIVE_LOW>;
+    oplus,oplus-esim-en = <&pm8550vs_c_gpios 6 GPIO_ACTIVE_LOW>;
+    oplus,oplus-sim2-det = <&pmk8550_gpios 103 0>;
+    oplus,uim-reset-pin = "modem_solution";
+  };
+  oplus_sim_detect {
+    compatible = "oplus, sim_detect";
+    Hw,sim_det = "modem_det";
+  };
+  //#endif /*OPLUS_FEATURE_ESIM*/
+
+  //#ifdef OPLUS_FEATURE_RF_CABLE_DETECT
+  oplus_rf_cable {
+      compatible = "oplus,rf_cable";
+      interrupt-parent = <&tlmm>;
+      rf_cable_support_num = <1>;
+      rf,cable0-gpio = <&tlmm 78 0>;
+      rf,cable-support-timer = <0>;
+      pinctrl-names = "rf_cable_active";
+      pinctrl-0 = <&rf_cable0_active>;
+  };
+  //#endif /* OPLUS_FEATURE_RF_CABLE_DETECT */
+
+  oplus_kernel_state_monitor {
+    compatible = "oplus,kernel_state_monitor";
+  };
+
+};
+
+&pmxr2230_gpios {
+  esim_det_gpio: esim_det_gpio {
+      pins = "gpio11";
+      function = "normal";
+      bias-disable; /* NO pull */
+      qcom,drive-strength = <2>; /* 2 MA */
+      power-source = <2>; /* 1.2V */
+      output-high;
+  };
+};
+
+&pm8550vs_c_gpios {
+  esim_en_gpio: esim_en_gpio {
+      pins = "gpio6";
+      function = "normal";
+      bias-disable; /* NO pull */
+      qcom,drive-strength = <2>; /* 2 MA */
+      power-source = <1>; /* 1.8V */
+      output-high;
+  };
+};
+
+&pmk8550_gpios {
+    sim2_det_no_pull: sim2_det_no_pull {
+        pins = "gpio103";
+        function = "normal";
+        input-enable;
+        power-source = <1>;
+        bias-disable;
+    };
+
+    sim2_det_pull_high: sim2_det_pull_high {
+        pins = "gpio103";
+        function = "normal";
+        input-enable;
+        power-source = <1>;
+        bias-pull-up;
+    };
+
+    sim2_det_pull_low: sim2_det_pull_low {
+        pins = "gpio103";
+        function = "normal";
+        input-enable;
+        power-source = <1>;
+        bias-pull-down;
+    };
+};
+
+&tlmm {
+  //#ifdef OPLUS_FEATURE_RF_CABLE_DETECT
+  rf_cable0_active: rf_cable0_active {
+      mux {
+          pins = "gpio78";
+          function = "gpio";
+      };
+      config {
+          pins = "gpio78";
+          drive-strength = <2>;
+          input-enable;
+          bias-pull-up;
+      };
+  };
+  //#endif /* OPLUS_FEATURE_RF_CABLE_DETECT */
+};

@@ -1,0 +1,10 @@
+/dts-v1/;
+/plugin/;
+#include <dt-bindings/oplus/hw-id.h>
+#include "../volcano-audio-mtp.dts"
+#include "volcano-audio-overlay-common.dtsi"
+#include "knight-l-24065-audio-volcano-overlay.dtsi"
+
+/ {
+    oplus,project-id = <24065 24291>;
+};

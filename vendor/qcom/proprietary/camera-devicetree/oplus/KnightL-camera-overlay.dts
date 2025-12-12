@@ -1,0 +1,17 @@
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/clock/qcom,gcc-volcano.h>
+#include <dt-bindings/clock/qcom,camcc-volcano.h>
+#include <dt-bindings/interconnect/qcom,volcano.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
+
+#include <dt-bindings/oplus/hw-id.h>
+#include "../volcano-camera.dtsi"
+#include "KnightL_camera_overlay_common.dtsi"
+/ {
+	model = "Qualcomm Technologies, Inc. volcano MTP,Knight-L";
+	compatible = "qcom,volcano-mtp", "qcom,volcano", "qcom,mtp";
+	oplus,project-id = <24065 24291>;
+};

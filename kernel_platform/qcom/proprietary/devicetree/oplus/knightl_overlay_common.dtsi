@@ -1,0 +1,99 @@
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
+
+// Add the thermistors for shell-temp
+//#ifdef /* OPLUS_FEATURE_THERMAL_HORAE */
+&soc {
+	shell_front {
+		compatible = "oplus,shell-temp";
+	};
+
+	shell_frame {
+		compatible = "oplus,shell-temp";
+	};
+
+	shell_back {
+		compatible = "oplus,shell-temp";
+	};
+};
+//#endif /* OPLUS_FEATURE_THERMAL_HORAE */
+&pmk8550 {
+//#ifdef CONFIG_OPLUS_FEATURE_QCOM_PMICWD
+//pmicwd depend on pon_pbs@800
+    pon_pbs@800 {
+         compatible = "qcom,qpnp-power-on";
+         reg = <0x800>;
+         qcom,system-reset;
+         qcom,store-hard-reset-reason;
+    };
+
+    pon_pmicwd@800 {
+         compatible = "oplus,pmicwd_qpnp-power-on";
+         qcom,pmicwd;
+    };
+//#endif /* CONFIG_OPLUS_FEATURE_QCOM_PMICWD */
+};
+
+&sdhc_2 {
+	status = "disabled";
+};
+
+&apps_rsc_drv2 {
+    rpmh-regulator-ldob14 {
+        compatible = "qcom,rpmh-vrm-regulator";
+        qcom,resource-name = "ldob14";
+        qcom,regulator-type = "pmic5-ldo";
+        qcom,supported-modes =
+            <RPMH_REGULATOR_MODE_LPM
+            RPMH_REGULATOR_MODE_HPM>;
+        qcom,mode-threshold-currents = <0 10000>;
+
+		L14B:
+		pm7550_l14: regulator-pm7550-l14 {
+			regulator-name = "pm7550_l14";
+			qcom,set = <RPMH_REGULATOR_SET_ALL>;
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3304000>;
+			qcom,init-voltage = <3300000>;
+			qcom,init-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
+    };
+};
+
+&soc {
+    bootloader_log {
+        compatible = "bootloader_log";
+        linux,contiguous-region = <&bootloader_log_mem>;
+    };
+    dump_device_info {
+        compatible = "dump_device_info";
+        linux,contiguous-region = <&dump_device_info_mem>;
+    };
+};
+
+&reserved_memory {
+    /*
+    This size is from Core/Uefi/LAA/memmap.dtsi
+    reg = <0x0 0x81CE4000 0x0 0x00010000>;
+    MemLabel = "UEFI_Log";
+    so we reserve this for bootloader log
+    */
+    bootloader_log_mem: botloader_mem@0x81CE4000 {
+        reg = <0 0x81CE4000 0 0x00010000>;
+        label = "bootloader_log_mem";
+    };
+
+    dump_device_info_mem: device_info_mem@0xA4F00000 {
+        reg = <0 0xA4F00000 0 0x00008000>;
+        label = "dump_device_info_mem";
+    };
+
+    ramoops_mem: ramoops_region@0xA1F00000 {
+        compatible = "ramoops";
+        alloc-ranges = <0x0 0x00000000 0xffffffff 0xffffffff>;
+        size = <0x0 0x240000>;
+        pmsg-size = <0x200000>;
+        console-size = <0x40000>;
+        mem-type = <2>;
+    };
+};
+
