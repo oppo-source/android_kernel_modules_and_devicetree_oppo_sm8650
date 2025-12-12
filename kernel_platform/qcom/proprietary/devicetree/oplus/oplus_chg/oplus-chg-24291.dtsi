@@ -1,0 +1,23 @@
+//ifdef OPLUS_FEATURE_CHG_BASIC
+//BSP.CHG.Basic, 2024/10/25,  Add for charging
+//K-L domestic
+
+#include <dt-bindings/iio/qcom,spmi-adc5-gen3-pmxr2230.h>
+#include <dt-bindings/iio/qcom,spmi-adc5-gen3-pmiv0104.h>
+#include <dt-bindings/iio/qcom,spmi-adc5-gen3-pmk8550.h>
+
+#include "oplus-chg-8650.h.dtsi"
+#include "oplus-chg-kl-common.dtsi"
+
+&soc {
+	oplus_cpa: oplus,cpa {
+		compatible = "oplus,cpa";
+		oplus,protocol_list = <CHG_PROTOCOL_VOOC 80
+				       CHG_PROTOCOL_PPS  33
+				       CHG_PROTOCOL_PD 18
+				       CHG_PROTOCOL_QC 18>;
+		oplus,default_protocol_list = <CHG_PROTOCOL_VOOC
+					       CHG_PROTOCOL_PPS
+					       CHG_PROTOCOL_PD>;
+	};
+};

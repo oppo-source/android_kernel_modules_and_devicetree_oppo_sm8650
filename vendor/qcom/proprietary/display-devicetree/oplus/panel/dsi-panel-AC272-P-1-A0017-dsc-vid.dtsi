@@ -1,0 +1,367 @@
+&mdss_mdp {
+	dsi_panel_ac272_p_1_a0017_vid: qcom,mdss_dsi_panel_ac272_p_1_a0017_vid {
+		qcom,mdss-dsi-panel-name = "AC272 P 1 A0017 vid mode panel";
+		qcom,mdss-dsi-panel-type = "dsi_video_mode";
+		oplus,mdss-dsi-vendor-name = "A0017";
+		oplus,mdss-dsi-manufacture = "P_1";
+		qcom,mdss-dsi-virtual-channel-id = <0>;
+		qcom,mdss-dsi-stream = <0>;
+		qcom,mdss-dsi-bpp = <24>;
+		qcom,mdss-dsi-color-order = "rgb_swap_rgb";
+		qcom,mdss-dsi-underflow-color = <0xff>;
+		qcom,mdss-dsi-border-color = <0>;
+		qcom,dsi-ctrl-num = <0>;
+		qcom,dsi-phy-num = <0>;
+		qcom,mdss-dsi-traffic-mode = "non_burst_sync_event";
+		qcom,mdss-dsi-lane-map = "lane_map_0123";
+		qcom,mdss-dsi-bllp-eof-power-mode;
+		qcom,mdss-dsi-bllp-power-mode;
+		qcom,mdss-dsi-lane-0-state;
+		qcom,mdss-dsi-lane-1-state;
+		qcom,mdss-dsi-lane-2-state;
+		qcom,mdss-dsi-lane-3-state;
+		qcom,mdss-dsi-dma-trigger = "trigger_sw";
+		qcom,mdss-dsi-mdp-trigger = "none";
+		qcom,mdss-dsi-reset-sequence = <1 10>, <0 10>, <1 10>;
+		qcom,mdss-pan-physical-width-dimension = <69>;
+		qcom,mdss-pan-physical-height-dimension = <155>;
+		//qcom,mdss-dsi-lp11-init;
+		qcom,mdss-dsi-init-delay-us = <1000>;
+		qcom,mdss-dsi-panel-jitter = <0x4 0x1>;
+		qcom,mdss-dsi-dma-schedule-line = <5>;
+		//qcom,dynamic-mode-switch-enabled;
+		qcom,dynamic-mode-switch-type = "dynamic-resolution-switch-immediate";
+		/* ofp config*/
+		oplus,ofp-need-to-recovery-backlight;
+
+		qcom,mdss-dsi-display-timings {
+			timing@0 {
+				cell-index = <0>;
+				//qcom,mdss-mdp-transfer-time-us = <6000>;
+				qcom,mdss-dsi-panel-framerate = <120>;
+				qcom,mdss-dsi-panel-clockrate = <998000000>;
+				qcom,mdss-dsi-panel-width = <1080>;
+				qcom,mdss-dsi-panel-height = <2400>;
+				qcom,mdss-dsi-h-front-porch = <86>;
+				qcom,mdss-dsi-h-back-porch = <84>;
+				qcom,mdss-dsi-h-pulse-width = <40>;
+				qcom,mdss-dsi-h-sync-pulse = <0>;
+				qcom,mdss-dsi-v-back-porch = <14>;
+				qcom,mdss-dsi-v-front-porch = <16>;
+				qcom,mdss-dsi-v-pulse-width = <2>;
+				qcom,mdss-dsi-h-left-border = <0>;
+				qcom,mdss-dsi-h-right-border = <0>;
+				qcom,mdss-dsi-v-top-border = <0>;
+				qcom,mdss-dsi-v-bottom-border = <0>;
+				/* ofp config*/
+				oplus,ofp-need-to-sync-data-in-aod-unlocking;
+				oplus,ofp-need-to-separate-backlight;
+				oplus,ofp-aod-off-insert-black-frame = <4>;
+				oplus,ofp-aod-off-black-frame-total-time = <42>;
+
+				qcom,mdss-dsi-on-command = [
+				/* sleep out */
+				15 01 00 00 14 00 02 11 00
+				/* DSC PPS Setting */
+				15 01 00 00 00 00 02 07 01
+				15 01 00 00 00 00 02 9D 01
+				39 01 00 00 00 00 5A 9E 11 00 00 89 30 80 09 60 04 38 00 28 02 1C 02 1C 02 00 02 0E 00 20 03 DD 00 07 00 0C 02 77 02 8B 18 00 10 F0 03 0C 20 00 06 0B 0B 33 0E 1C 2A 38 46 54 62 69 70 77 79 7B 7D 7E 01 02 01 00 09 40 09 BE 19 FC 19 FA 19 F8 1A 38 1A 78 1A B6 2A F6 2B 34 2B 74 3B 74 6B F4 00
+				/* TE on */
+				15 01 00 00 00 00 02 35 00
+				/* Frequency Change Setting */
+				39 01 00 00 00 00 03 F0 5A 5A
+				/* 01:120Hz, 21:60Hz */
+				15 01 00 00 00 00 02 60 01
+				15 01 00 00 00 00 02 F7 0B
+				39 01 00 00 00 00 03 F0 A5 A5
+				/* Flat Mode Control */
+				39 01 00 00 00 00 03 F0 5A 5A
+				39 01 00 00 00 00 04 B0 00 89 B1
+				15 01 00 00 00 00 02 B1 2F
+				39 01 00 00 00 00 04 B0 00 03 B8
+				15 01 00 00 00 00 02 B8 DF
+				39 01 00 00 00 00 04 B0 00 06 B8
+				15 01 00 00 00 00 02 B8 DF
+				/* 100% mode on */
+				15 01 00 00 00 00 02 80 05
+				15 01 00 00 00 00 02 B1 00
+				39 01 00 00 00 00 04 B0 00 01 B5
+				39 01 00 00 00 00 16 B5 E2 00 00 00 E1 00 00 00 E2 00 E2 E2 E2 00 E2 E1 E1 00 FF FF FF
+				39 01 00 00 00 00 03 F0 A5 A5
+				/* Brightness Control Dimming Setting */
+				39 01 00 00 00 00 03 F0 5A 5A
+				15 01 00 00 00 00 02 53 20
+				39 01 00 00 00 00 03 F0 A5 A5
+				/* ERR FG Setting */
+				39 01 00 00 00 00 03 F0 5A 5A
+				39 01 00 00 00 00 03 FC 5A 5A
+				39 01 00 00 00 00 04 ED 01 CF 00
+				15 01 00 00 00 00 02 E1 9B
+				39 01 00 00 00 00 04 B0 00 06 F4
+				15 01 00 00 00 00 02 F4 1F
+				39 01 00 00 00 00 03 F0 A5 A5
+				39 01 00 00 64 00 03 FC A5 A5
+				/* Display on */
+				15 01 00 00 00 00 02 29 00
+				];
+
+				qcom,mdss-dsi-off-command = [
+				/* Display Off(28h) */
+				15 01 00 00 14 00 02 28 00
+				/* Sleep In(10h) */
+				15 01 00 00 96 00 02 10 00
+				];
+				qcom,mdss-dsi-lp1-command = [
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 20
+				39 00 00 40 00 00 03 51 02 9E
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+				qcom,mdss-dsi-nolp-command = [
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 20
+				39 00 00 40 00 00 03 51 00 00
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-aod-high-mode-command = [
+				/* AOD High Mode 50nit */
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 20
+				39 00 00 40 00 00 03 51 02 9E
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+				qcom,mdss-dsi-aod-low-mode-command = [
+				/* AOD Low Mode 10nit */
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 20
+				39 00 00 40 00 00 03 51 01 70
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+				qcom,mdss-dsi-hbm-on-command = [
+				/* HBM Mode ON */
+				39 00 00 40 00 00 03 F0 5A 5A
+				39 00 00 40 00 00 04 B0 00 0C B2
+				15 00 00 40 00 00 02 B2 30
+				39 00 00 40 00 00 03 F0 A5 A5
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 E0
+				39 00 00 40 00 00 03 51 0D 55
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+				qcom,mdss-dsi-hbm-off-command = [
+				/* HBM Mode OFF */
+				39 00 00 40 00 00 03 F0 5A 5A
+				39 00 00 40 00 00 04 B0 00 0C B2
+				15 00 00 40 00 00 02 B2 30
+				39 00 00 40 00 00 03 F0 A5 A5
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 20
+				39 00 00 40 00 00 03 51 00 00
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-hbm-on-60hz-command = [
+				/* HBM Mode ON */
+				39 00 00 40 00 00 03 F0 5A 5A
+				39 00 00 40 00 00 04 B0 00 0C B2
+				15 00 00 40 00 00 02 B2 30
+				39 00 00 40 00 00 03 F0 A5 A5
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 E0
+				39 00 00 40 00 00 03 51 0D 55
+				39 00 00 00 09 00 03 F0 A5 A5
+				];
+				qcom,mdss-dsi-hbm-off-60hz-command = [
+				/* HBM Mode OFF */
+				39 00 00 40 00 00 03 F0 5A 5A
+				39 00 00 40 00 00 04 B0 00 0C B2
+				15 00 00 40 00 00 02 B2 30
+				39 00 00 40 00 00 03 F0 A5 A5
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 20
+				39 00 00 40 00 00 03 51 00 00
+				39 00 00 00 09 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-pre-off-command = [
+				39 00 00 40 00 00 03 F0 5A 5A
+				39 00 00 40 00 00 04 B0 00 0C B2
+				15 00 00 40 00 00 02 B2 20
+				39 00 00 00 00 00 03 F0 A5 A5
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 20
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+				qcom,dsi-panel-date-switch-command = [
+				39 01 00 00 00 00 03 F0 5A 5A
+				];
+				qcom,mdss-dsi-default-switch-page-command = [
+				39 01 00 00 00 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-vid-120hz-switch-command = [
+				39 00 00 60 00 00 03 F0 5A 5A
+				15 00 00 60 00 00 02 60 01
+				39 00 00 60 00 00 02 F7 0B
+				39 00 00 20 00 00 03 F0 A5 A5
+				];
+				qcom,mdss-dsi-vid-60hz-switch-command = [
+				39 00 00 50 00 00 03 F0 5A 5A
+				15 00 00 50 00 00 02 60 21
+				39 00 00 50 00 00 02 F7 0B
+				39 00 00 10 00 00 03 F0 A5 A5
+				];
+				qcom,mdss-dsi-esd-switch-page-command = [
+				39 00 00 40 00 00 03 F0 5A 5A
+				39 00 00 00 00 00 03 FC 5A 5A
+				];
+				qcom,mdss-dsi-esd-switch-default-page-command = [
+				39 00 00 40 00 00 03 F0 A5 A5
+				39 00 00 00 00 00 03 FC A5 A5
+				];
+				qcom,mdss-dsi-ffc-mode0-command = [
+				/* osc 96.3 */
+				39 01 00 00 00 00 03 F0 5A 5A
+				39 01 00 00 00 00 03 FC 5A 5A
+				39 01 00 00 00 00 04 B0 00 14 DF
+				15 01 00 00 00 00 02 DF 01
+				39 01 00 00 00 00 08 DF 09 30 95 4E 29 4E 29
+				39 01 00 00 00 00 03 F0 A5 A5
+				39 01 00 00 00 00 03 FC A5 A5
+				];
+				qcom,mdss-dsi-ffc-mode1-command = [
+				/* osc 95.33 */
+				39 01 00 00 00 00 03 F0 5A 5A
+				39 01 00 00 00 00 03 FC 5A 5A
+				39 01 00 00 00 00 04 B0 00 14 DF
+				15 01 00 00 00 00 02 DF 01
+				39 01 00 00 00 00 08 DF 09 30 95 4B B9 4B B9
+				39 01 00 00 00 00 03 F0 A5 A5
+				39 01 00 00 00 00 03 FC A5 A5
+				];
+				qcom,mdss-dsi-hbm-enter-switch-command = [
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 E0
+				39 00 00 40 00 00 03 51 08 00
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+				qcom,mdss-dsi-hbm-exit-switch-command = [
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 20
+				39 00 00 40 00 00 03 51 07 FF
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+				qcom,mdss-dsi-dimming-setting-command = [
+				39 00 00 40 00 00 03 F0 5A 5A
+				15 00 00 40 00 00 02 53 20
+				39 00 00 00 00 00 03 F0 A5 A5
+				];
+
+				qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
+				qcom,mdss-dsi-off-command-state = "dsi_lp_mode";
+				qcom,mdss-dsi-lp1-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-nolp-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-aod-high-mode-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-aod-low-mode-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-hbm-on-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-hbm-off-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-hbm-on-60hz-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-hbm-off-60hz-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-pre-off-command-state = "dsi_hs_mode";
+				qcom,dsi-panel-date-switch-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-default-switch-page-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-vid-120hz-switch-command-state = "dsi_lp_mode";
+				qcom,mdss-dsi-vid-60hz-switch-command-state = "dsi_lp_mode";
+				qcom,mdss-dsi-esd-switch-page-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-esd-switch-default-page-command-state = "dsi_hs_mode";
+				qcom,mdss-dsi-ffc-mode0-command-state = "dsi_lp_mode";
+				qcom,mdss-dsi-ffc-mode1-command-state = "dsi_lp_mode";
+				qcom,mdss-dsi-hbm-enter-switch-command-state = "dsi_lp_mode";
+				qcom,mdss-dsi-hbm-exit-switch-command-state = "dsi_lp_mode";
+				qcom,mdss-dsi-dimming-setting-command-state = "dsi_hs_mode";
+
+				qcom,compression-mode = "dsc";
+				qcom,mdss-dsc-encoders = <2>;
+				qcom,mdss-dsc-slice-per-pkt = <1>;
+				qcom,mdss-dsc-bit-per-component = <8>;
+				qcom,mdss-dsc-bit-per-pixel = <8>;
+				qcom,mdss-dsc-slice-height = <40>;
+				qcom,mdss-dsc-slice-width = <540>;
+				qcom,mdss-dsc-block-prediction-enable;
+
+			};
+		};
+	};
+};
+
+
+&dsi_panel_ac272_p_1_a0017_vid {
+	qcom,ulps-enabled;
+	qcom,dsi-select-clocks = "pll_byte_clk0", "pll_dsi_clk0";
+	qcom,mdss-dsi-t-clk-post = <0x0D>;
+	qcom,mdss-dsi-t-clk-pre = <0x1C>;
+	qcom,mdss-dsi-display-timings {
+		timing@0 {
+			qcom,mdss-dsi-panel-phy-timings = [00 22 08 08 19 17 09 08 09 02 04 00 1C 0D];
+			qcom,display-topology = <1 1 1>;
+			qcom,default-topology-index = <0>;
+		};
+	};
+};
+
+&dsi_panel_ac272_p_1_a0017_vid {
+	/* HARDWARE CONFIG */
+	qcom,panel-supply-entries = <&Knight_L_dsi_panel_pwr_supply_oled>;
+	qcom,platform-reset-gpio = <&tlmm 12 0>;
+
+	/* ofp config*/
+	oplus,ofp-fp-type = <0x200>;
+
+	/* BRIGHTNESS CONFIG */
+	qcom,mdss-dsi-bl-pmic-control-type = "bl_ctrl_dcs";
+	qcom,bl-dsc-cmd-state = "dsi_hs_mode";
+	qcom,mdss-dsi-bl-inverted-dbv;
+	qcom,mdss-dsi-bl-min-level = <1>;
+	qcom,mdss-dsi-bl-max-level = <4095>;
+	qcom,mdss-brightness-max-level = <4095>;
+	oplus,dsi-bl-normal-max-level = <2047>;
+	oplus,dsi-brightness-normal-max-level = <2047>;
+	oplus,dsi-brightness-default-level = <1433>;
+	oplus,dsi-dc-backlight-threshold = <1037>;
+	oplus,dsi-global-hbm-case-id = <1>;
+
+	/* Dimming Setting config*/
+	oplus,dsi-dimming-setting-before-bl-0-enable;
+	oplus,dsi-vidmode-backlight-async-wait-enable;
+	oplus,dsi-set-backlight-not-do-esd-reg-read-enable;
+
+	/* vid-timming-switch */
+	oplus,dsi-vid-timming-switch_enable;
+
+	/* serial num config */
+	oplus,dsi-serial-number-enabled;
+	oplus,dsi-serial-number-switch-page;
+	oplus,dsi-serial-number-index= <7>;
+	oplus,dsi-serial-number-reg= <0xD8>;
+	oplus,dsi-serial-number-read-count= <14>;
+
+	/* osc */
+	oplus,ffc-enabled;
+	oplus,clk-osc-sequence =
+		<998000000 96300>,
+		<998000000 93300>;
+
+	/* ESD CONFIG */
+	qcom,esd-check-enabled;
+	oplus,esd_mipi_err_gpio = <&tlmm 124 0>;
+	qcom,mdss-dsi-panel-status-check-mode = "mipi_err_check";
+
+	/* fps-switch */
+	qcom,mdss-dsi-pan-enable-dynamic-fps;
+	qcom,mdss-dsi-pan-fps-update = "dfps_immediate_porch_mode_vfp";
+	qcom,dsi-supported-dfps-list = <120 60>;
+	qcom,mdss-dsi-qsync-min-refresh-rate = <60>;
+	qcom,mdss-dsi-qsync-max-refresh-rate = <120>;
+
+};

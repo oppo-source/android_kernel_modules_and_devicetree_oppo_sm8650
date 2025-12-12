@@ -1,0 +1,13 @@
+/dts-v1/;
+/plugin/;
+#include <dt-bindings/oplus/hw-id.h>
+#include "../display/volcano-sde-display-mtp-overlay.dts"
+
+#include "volcano-display-overlay-common.dtsi"
+#include "KnightL-24065-display-volcano-overlay.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Volcano MTP,dongfeng";
+
+	oplus,project-id = <24065 24291>;
+};

@@ -1,0 +1,112 @@
+&tlmm {
+    /* WCD reset pin */
+    wcd_reset_active: wcd_reset_active {
+        config {
+            drive-strength = <6>;
+        };
+    };
+
+    wcd_reset_sleep: wcd_reset_sleep {
+        config {
+            drive-strength = <2>;
+        };
+    };
+
+    sia81xx_gpio_L: sia81xx_gpio_L {
+        mux {
+            pins = "gpio24", "gpio24";
+            function = "gpio";
+        };
+
+        config {
+            pins = "gpio24", "gpio24";
+            drive-strength = <4>;
+            bias-disable;
+        };
+    };
+
+    sia81xx_gpio_R: sia81xx_gpio_R {
+        mux {
+            pins = "gpio23", "gpio23";
+            function = "gpio";
+        };
+
+        config {
+            pins = "gpio23", "gpio23";
+            drive-strength = <4>;
+            bias-disable;
+        };
+    };
+};
+
+&soc {
+    si_pa_L: si_pa_L{
+            compatible = "si,sia81xx";
+            si,si_pa_type = "sia81x9";
+            si,si_pa_reset = <&tlmm 24 0x00>;
+            si,si_pa_owi = <&tlmm 24 0x00>;
+            pinctrl-names = "si_pa_gpio";
+            pinctrl-0 = <&sia81xx_gpio_L>;
+
+            si,si_pa_disable_pin = <0>;
+
+            /* the same value share a same task
+             * valid value range : 0 ~ 7 */
+            timer_task_hdl = <0>;
+
+            channel_num = <0>;
+            owi_mode = <1>;
+    };
+
+    si_pa_R: si_pa_R{
+            compatible = "si,sia81xx";
+            si,si_pa_type = "sia81x9";
+            si,si_pa_reset = <&tlmm 23 0x00>;
+            si,si_pa_owi = <&tlmm 23 0x00>;
+            pinctrl-names = "si_pa_gpio";
+            pinctrl-0 = <&sia81xx_gpio_R>;
+
+            si,si_pa_disable_pin = <0>;
+
+            /* the same value share a same task
+             * valid value range : 0 ~ 7 */
+            timer_task_hdl = <0>;
+
+            channel_num = <1>;
+            owi_mode = <1>;
+    };
+};
+
+&pineapple_snd {
+    oplus,speaker-pa = "sia81xx";
+    si,sia81xx-max-num = <2>;
+    si,sia81xx-aux-devs = <&si_pa_L>, <&si_pa_R>;
+    si,sia81xx-aux-devs-prefix = "SpkrMonoL", "SpkrMonoR";
+    fsa4480-i2c-handle = <&fsa4480>;
+};
+
+&qupv3_se7_spi {
+    status = "disable";
+};
+
+&qupv3_se7_i2c {
+    status = "okay";
+
+    sipa_i2c_L: sipa_i2c_L@28 {
+        compatible = "si,sia81xx-i2c";
+        reg = <0x28>;
+        si,sipa-dev = <&si_pa_L>;
+    };
+
+    sipa_i2c_R: sipa_i2c_R@29 {
+        compatible = "si,sia81xx-i2c";
+        reg = <0x29>;
+        si,sipa-dev = <&si_pa_R>;
+    };
+
+    fsa4480: fsa4480@42 {
+        status = "okay";
+        compatible = "qcom,fsa4480-i2c";
+        reg = <0x42>;
+    };
+};
